@@ -1,0 +1,26 @@
+{
+	"short_name": "Cosmonaut",
+	"name": "Save the Cosmonaut!",
+	"description": "Save the Cosmonaut from the asterioids!!",
+	"icons": [
+		{
+			"src": "./logo512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "any"
+		},
+		{
+			"src": "./logo512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "maskable"
+		}
+	],
+	"start_url": "/",
+	"background_color": "#f39c12",
+	"display": "standalone",
+	"theme_color": "#f39c12",
+	"orientation": "portrait-primary",
+	"categories": ["explore", "play", "location", "social"],
+	"lang": "en-US"
+}
