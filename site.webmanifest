@@ -1,7 +1,7 @@
 {
 	"short_name": "Cosmonaut",
 	"name": "Save the Cosmonaut!",
-	"description": "Save the Cosmonaut from the asterioids!!",
+	"description": "Save the Cosmonaut from the asteroids!!",
 	"icons": [
 		{
 			"src": "./logo512.png",
