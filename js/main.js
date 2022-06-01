@@ -3,7 +3,7 @@
 //* Canvas setup
 var canvasGfx = document.getElementById("canvasGfx")
 var ctx = canvasGfx.getContext("2d")
-
+var globalScore
 canvW = 1000
 canvH = 600
 canvasGfx.width = canvW
@@ -95,6 +95,21 @@ function drawGameCredits() {
 	ctx.font = "20px 'Segoe UI'"
 	ctx.textAlign = "start"
 	ctx.fillText("Credits: " + gameCredits, (1 / 32) * canvW, (1 / 8) * canvH)
+}
+
+function drawGameLevel() {
+	ctx.fillStyle = "#fff"
+	ctx.font = "20px 'Segoe UI'"
+	ctx.textAlign = "start"
+
+	let level = ""
+	if(globalScore < 1501) level = "1"
+	else if(globalScore < 3001) level = "2"
+	else if(globalScore < 4501) level = "3"
+	else if(globalScore < 6001) level = "4"
+	else if(globalScore < 7501) { level = "5"; congratulations()}
+
+	ctx.fillText("Level: " + level, (25 / 32) * canvW, (1 / 8) * canvH)
 }
 
 function drawHearts() {
@@ -315,6 +330,7 @@ function animate() {
 		asteroid.update()
 		astronaut.draw()
 		drawGameCredits()
+		drawGameLevel()
 		drawHearts()
 
 		if (invulnerable && invulnerableCounter < invulnerableTime) {
@@ -336,6 +352,8 @@ function animate() {
 			oldGameScore = gameScore
 			speed += 0.5
 		}
+
+		globalScore = gameScore
 		//ctx.fillRect(0, canvH/2, 1000, 1); //| test line, find center
 	}
 
@@ -434,4 +452,8 @@ function endGame(gameScore) {
 	setTimeout(() => {
 		window.location.href = "/"
 	}, 2000)
+}
+
+function congratulations() {
+	window.location.href = "/congratulations"
 }
