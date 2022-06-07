@@ -1,6 +1,7 @@
 //* TODO: instead of credits-, hearts- and score-overlay. Unify to a single HUD-overlay
 
 //* Canvas setup
+let spaceman = new BroadcastChannel("spaceman")
 var canvasGfx = document.getElementById("canvasGfx")
 var ctx = canvasGfx.getContext("2d")
 var globalScore
@@ -103,11 +104,11 @@ function drawGameLevel() {
 	ctx.textAlign = "start"
 
 	let level = ""
-	if(globalScore < 1501) level = "1"
-	else if(globalScore < 3001) level = "2"
-	else if(globalScore < 4501) level = "3"
-	else if(globalScore < 6001) level = "4"
-	else if(globalScore < 7501) { level = "5"; congratulations()}
+	if(globalScore < 800) level = "1"
+	else if(globalScore < 1600) level = "2"
+	else if(globalScore < 2400) level = "3"
+	else if(globalScore < 3200) level = "4"
+	else if(globalScore < 4000) { level = "5"; congratulations()}
 
 	ctx.fillText("Level: " + level, (25 / 32) * canvW, (1 / 8) * canvH)
 }
@@ -455,5 +456,6 @@ function endGame(gameScore) {
 }
 
 function congratulations() {
-	window.location.href = "/congratulations"
+	spaceman.postMessage("game complete")
+	window.close()
 }

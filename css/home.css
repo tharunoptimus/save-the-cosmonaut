@@ -7,9 +7,13 @@ body {
 	font-weight: 400;
 }
 
-body {
-    background-color: #f39c12;
+* {
+	user-select: none;
 }
+
+/* body {
+    background-color: #f39c12;
+} */
 
 .wrapper {
 	min-height: 100vh;
@@ -33,6 +37,50 @@ body {
 
 .astronautImage {
 	padding-top: 2rem;
+	position: relative;
+}
+
+.information {
+	min-width: 375px;
+	max-width: max-content;
+	border-radius: 8px;
+	border: 1px solid #44444444;
+	background-color: #e67e22;
+	color: white;
+	position: absolute;
+	top: 0%;
+	left: 120%;
+	font-size: 1.3rem;
+	padding: 0.3em 0.8em;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.skipButton {
+	margin-top: 0.3rem;
+	padding: 0.2em 0.6em;
+	border: none;
+	border-radius: 5px;
+	font-size: 1.3rem;
+	color: #e67e22;
+	cursor: pointer;
+}
+
+.skipButton:active {
+	transform: translateY(5%);
+}
+
+.storyLine {
+	width: 100%;
+}
+
+.information::after {
+	content: "👈";
+	color: #e67e22;
+	position: absolute;
+	bottom: -18px;
+	left: -20px;
 }
 
 .scoreText {
@@ -66,4 +114,82 @@ body {
 	        box-shadow: none;
 	position: relative;
 	top: 0.2em;
+}
+
+.games {
+	padding-top: 2rem;
+	display: flex;
+	align-items: center;
+}
+
+.gameDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem;
+	max-width: 250px;
+	cursor: pointer;
+	border-radius: 7px;
+	border: 1px solid #44444444;
+	box-shadow: 3px 2px 15px 1px #44444444;
+}
+
+.gameDiv:hover {
+	transform: scale(1.02);
+	transition: linear;
+	transition-duration: 0.2s;
+}
+
+.gameImage {
+	border-radius: 8px;
+}
+
+.gameName {
+	text-align: center;
+	color: black;
+	font-weight: 400;
+	font-size: 1.5rem;
+	padding: 1.2rem 0;
+}
+
+.noSelect {
+	pointer-events: none;
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.buttons {
+	display: flex;
+	align-items: center;
+	padding-top: 2rem;
+}
+
+.endButtons {
+	padding: 0.3em 1.2em;
+	color: white;
+	font-size: 1.5rem;
+	border-radius: 15px;
+	border: none;
+	cursor: pointer;
+}
+
+.endButtons:active {
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+	position: relative;
+	top: 0.2em;
+}
+
+.restart {
+	background-color: #f39c12;
+	box-shadow: 0px 7px 3px 4px #e67e22;
+}
+
+.gapSpan {
+	width: 25px;
+}
+
+.ticTacToe {
+	background-color: #0070f3;
+	box-shadow: 0px 7px 3px 4px #3390ce;
 }
