@@ -1,5 +1,6 @@
-const CACHE = "v1.1" // name of the current cache
+const CACHE = "v2.0" // name of the current cache
 const OFFLINE = "/offline"
+const CDNS = "Third-Party"
 
 const AUTO_CACHE = [
 	OFFLINE,
@@ -69,6 +70,28 @@ self.addEventListener("fetch", (event) => {
 	) {
 		return void event.respondWith(fetch(event.request).catch((err) => console.log(err)))
 	}
+
+	if (event.request.url.includes("cdnjs.cloudflare.com")
+		|| event.request.url.includes("maxcdn.bootstrapcdn.com")
+		|| event.request.url.includes("code.jquery.com")
+		|| event.request.url.includes("cdn.jsdelivr.net")
+		|| event.request.url.includes("fonts.googleapis.com")
+		|| event.request.url.includes("fonts.gstatic.com")
+		|| event.request.url.includes("use.fontawesome.com")
+		) {
+        event.respondWith(
+            caches.open(CDNS).then((cache) => {
+                return cache.match(event.request).then((response) => {
+                    if (response) return response
+                    return fetch(event.request).then((response) => {
+                        cache.put(event.request, response.clone())
+                        return response
+                    })
+                })
+            })
+        )
+        return
+    }
 
 	if(!isCached(event.request.url)){
 		event.respondWith(
