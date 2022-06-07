@@ -20,7 +20,7 @@
         <div class="astronautImage">
             <img height="200" width="125" src="./media/cosmonaut.png" alt="Cosmonaut 👨‍🚀">
             <div class="information">
-                <span class="storyLine">There are mysteries to the universe we were never meant to solve. But who we are and why are here are not among them. Those answers, we carry inside.</span>
+                <span class="storyLine">I'm inside a damaged hatch, many miles away from Earth, on Planet Mars... </span>
                 <button title="Skip Button" class="skipButton">Next</button>
             </div>
         </div>
@@ -79,15 +79,33 @@
         document.addEventListener("click", (e) => {
             if(e.target.className == "playButton") {
                 let url = ""
+                let title = ""
+                let width = 0
+                let height = 0
                 let id = e.target.parentNode.id
             
-                if(id == "puzzle") url = "/2048/index"
-                else if(id == "wordle") url = "/wordle"
-                else if(id == "spaceman") url = "/game"
-                window.open(url)
+                if(id == "puzzle") {
+                    url = "/2048/index"
+                    title = "Reach Score 250 to Finish Mission 🚀"
+                    popupwindow(url, title, 600, 800)
+                } else if(id == "wordle") {
+                    url = "/wordle"
+                    title = "Find the Word to repair ⚙"
+                    popupwindow(url, title, 600, 600)
+                }else if(id == "spaceman") {
+                    url = "/game"
+                    title = "Reach Level 5 to win 🥇"
+                    popupwindow(url, title, 1100, 700)
+                }
 
             }
         })
+
+        function popupwindow(url, title, w, h) {
+            var left = (screen.width/2)-(w/2);
+            var top = (screen.height/2)-(h/2);
+            return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+        } 
 
         function update(gameName) {
             console.log("request received")
@@ -101,13 +119,22 @@
             localStorage.setItem("gameStatus", JSON.stringify(data))
             window.location.reload()
         }
-        // if('serviceWorker' in navigator) {
-        //     window.addEventListener('load', () => {
-        //         navigator.serviceWorker.register('serviceworker.js')
-        //             .then((reg) => console.log('Success: ', reg.scope))
-        //             .catch((err) => console.log('Failure: ', err))
-        //     })
-        // }
+        if('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('serviceworker.js')
+                    .then((reg) => console.log('Success: ', reg.scope))
+                    .catch((err) => console.log('Failure: ', err))
+            })
+        }
+
+        document.querySelector(".skipButton").addEventListener("click", (e) => {
+            if(e.target.innerHTML == "Next") {
+                e.target.innerHTML = "Okay"
+                document.querySelector(".storyLine").innerHTML = "Please complete these tasks to help me see my family!"
+            } else {
+                e.target.parentNode.style.display = "none"
+            }
+        })
     </script>
 </body>
 </html>
