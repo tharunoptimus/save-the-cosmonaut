@@ -21,6 +21,23 @@
             <img height="341" width="213" src="./media/happy.webp" alt="Cosmonaut 👨‍🚀">
         </div>
 
+        <div class="buttons">
+            <button class="endButtons restart">Restart</button>
+            <span class="gapSpan"></span>
+            <button class="endButtons ticTacToe">Play Tic Tac Toe</button>
+        </div>
+
     </div>
+
+    <script>
+        document.querySelector(".restart").addEventListener("click", () => {
+            localStorage.setItem("gameStatus", null)
+            window.location.href = "/"
+        })
+
+        document.querySelector(".ticTacToe").addEventListener("click", () => {
+            window.location.href = "/tictactoe"
+        })
+    </script>
 </body>
 </html>
