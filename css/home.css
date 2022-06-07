@@ -8,7 +8,10 @@ body {
 }
 
 * {
-	user-select: none;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
 }
 
 /* body {
@@ -42,19 +45,28 @@ body {
 
 .information {
 	min-width: 375px;
+	max-width: -webkit-max-content;
+	max-width: -moz-max-content;
 	max-width: max-content;
 	border-radius: 8px;
 	border: 1px solid #44444444;
 	background-color: #e67e22;
-	color: white;
+	color: #070707;
 	position: absolute;
 	top: 0%;
 	left: 120%;
 	font-size: 1.3rem;
 	padding: 0.3em 0.8em;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: end;
+	    -ms-flex-align: end;
+	        align-items: flex-end;
 }
 
 .skipButton {
@@ -63,12 +75,14 @@ body {
 	border: none;
 	border-radius: 5px;
 	font-size: 1.3rem;
-	color: #e67e22;
+	color: #794212;
 	cursor: pointer;
 }
 
 .skipButton:active {
-	transform: translateY(5%);
+	-webkit-transform: translateY(5%);
+	    -ms-transform: translateY(5%);
+	        transform: translateY(5%);
 }
 
 .storyLine {
@@ -118,26 +132,44 @@ body {
 
 .games {
 	padding-top: 2rem;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 }
 
 .gameDiv {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	padding: 1rem;
 	max-width: 250px;
 	cursor: pointer;
 	border-radius: 7px;
 	border: 1px solid #44444444;
-	box-shadow: 3px 2px 15px 1px #44444444;
+	-webkit-box-shadow: 3px 2px 15px 1px #44444444;
+	        box-shadow: 3px 2px 15px 1px #44444444;
 }
 
 .gameDiv:hover {
-	transform: scale(1.02);
+	-webkit-transform: scale(1.02);
+	    -ms-transform: scale(1.02);
+	        transform: scale(1.02);
+	-webkit-transition: linear;
+	-o-transition: linear;
 	transition: linear;
-	transition-duration: 0.2s;
+	-webkit-transition-duration: 0.2s;
+	     -o-transition-duration: 0.2s;
+	        transition-duration: 0.2s;
 }
 
 .gameImage {
@@ -159,8 +191,12 @@ body {
 }
 
 .buttons {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	padding-top: 2rem;
 }
 
@@ -182,7 +218,8 @@ body {
 
 .restart {
 	background-color: #f39c12;
-	box-shadow: 0px 7px 3px 4px #e67e22;
+	-webkit-box-shadow: 0px 7px 3px 4px #e67e22;
+	        box-shadow: 0px 7px 3px 4px #e67e22;
 }
 
 .gapSpan {
@@ -191,5 +228,19 @@ body {
 
 .ticTacToe {
 	background-color: #0070f3;
-	box-shadow: 0px 7px 3px 4px #3390ce;
+	-webkit-box-shadow: 0px 7px 3px 4px #3390ce;
+	        box-shadow: 0px 7px 3px 4px #3390ce;
+}.example {
+    display: -ms-grid;
+    display: grid;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    background: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
+    background: -o-linear-gradient(top, white, black);
+    background: linear-gradient(to bottom, white, black);
 }
