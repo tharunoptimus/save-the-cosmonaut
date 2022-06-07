@@ -18,24 +18,96 @@
         <span class="titleText">Save the Cosmonaut!</span>
 
         <div class="astronautImage">
-            <img height="341" width="213" src="./media/cosmonaut.png" alt="Cosmonaut 👨‍🚀">
+            <img height="200" width="125" src="./media/cosmonaut.png" alt="Cosmonaut 👨‍🚀">
+            <div class="information">
+                <span class="storyLine">There are mysteries to the universe we were never meant to solve. But who we are and why are here are not among them. Those answers, we carry inside.</span>
+                <button title="Skip Button" class="skipButton">Next</button>
+            </div>
         </div>
 
-        <div class="scoreText"></div>
+        <div class="games">
+            <div class="gameDiv" id="puzzle">
+                <img class="gameImage" src="/media/2048.webp" height="150" width="150" alt="2048">
+                <span class="gameName">Solve this to open the hatch!</span>
+                <div class="playButton">Play</div>
+            </div>
+            <img src="/media/right.svg" height="80" width="80" class="nextArrow" alt="Next">
+            <div class="gameDiv noSelect" id="wordle">
+                <img  class="gameImage"src="/media/wordle.webp" height="150" width="150" alt="Wordle">
+                <span class="gameName">Find the important component for repair!</span>
+                <div class="playButton">Play</div>
+            </div>
+            <img src="/media/right.svg" height="80" width="80" class="nextArrow" alt="Next">
+            <div class="gameDiv noSelect" id="spaceman">
+                <img class="gameImage" src="/media/spaceman.webp" height="150" width="150" alt="Spaceman">
+                <span class="gameName">Interstellar travel to reach Earth!</span>
+                <div class="playButton">Play</div>
+            </div>
+        </div>
 
-        <div class="playButton">PLAY</div>
     </div>
     <script>
-        let highscore = localStorage.getItem("highscore");
-        document.querySelector(".scoreText").innerHTML = highscore != null ? "Highscore: " + localStorage.getItem("highscore") : ""
-        document.querySelector(".playButton").addEventListener("click", () => window.location.href = "game")
-        if('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('serviceworker.js')
-                    .then((reg) => console.log('Success: ', reg.scope))
-                    .catch((err) => console.log('Failure: ', err))
-            })
+
+        let qs = (element, parent=document) => parent.querySelector(element)
+        let data = JSON.parse(window.localStorage.getItem("gameStatus"))
+        let puzzleDiv = qs("#puzzle")
+        let wordleDiv = qs("#wordle")
+        let spacemanDiv = qs("#spaceman")
+        let channel = new BroadcastChannel('2048')
+        let wordle = new BroadcastChannel("wordle")
+        let spaceman = new BroadcastChannel("spaceman")
+
+        channel.onmessage = () => update("puzzle")
+        wordle.onmessage = () => update("wordle")
+        spaceman.onmessage = () => update("spaceman")
+        
+        if(data == null) {
+            localStorage.setItem("gameStatus", JSON.stringify({ 
+                puzzle: false,
+                wordle: false,
+                spaceman: false
+            }))
+            wordleDiv.classList.add("noSelect")
+            spacemanDiv.classList.add("noSelect")
+        } else {
+            let { puzzle, wordle, spaceman } = data
+
+            if(wordle) wordleDiv.classList.remove("noSelect")
+            if(spaceman) spacemanDiv.classList.remove("noSelect")
         }
+
+        document.addEventListener("click", (e) => {
+            if(e.target.className == "playButton") {
+                let url = ""
+                let id = e.target.parentNode.id
+            
+                if(id == "puzzle") url = "/2048/index"
+                else if(id == "wordle") url = "/wordle"
+                else if(id == "spaceman") url = "/game"
+                window.open(url)
+
+            }
+        })
+
+        function update(gameName) {
+            console.log("request received")
+            let data = JSON.parse(localStorage.getItem("gameStatus"))
+            data.wordle = gameName == "puzzle" ? true : data.wordle
+            data.spaceman = gameName == "wordle" ? true : data.spaceman
+            if(gameName == "spaceman") {
+                window.location.href = "/congratulations"
+                return false
+            }
+            localStorage.setItem("gameStatus", JSON.stringify(data))
+            window.location.reload()
+        }
+        // if('serviceWorker' in navigator) {
+        //     window.addEventListener('load', () => {
+        //         navigator.serviceWorker.register('serviceworker.js')
+        //             .then((reg) => console.log('Success: ', reg.scope))
+        //             .catch((err) => console.log('Failure: ', err))
+        //     })
+        // }
     </script>
 </body>
 </html>
