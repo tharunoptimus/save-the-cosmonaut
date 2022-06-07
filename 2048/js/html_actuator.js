@@ -113,6 +113,7 @@ HTMLActuator.prototype.updateScore = function (score) {
   // Update game logic to close window after scoreToClear is reached
   if (this.score >= scoreToClear) {
     channel.postMessage({ "result" : "complete"})
+    document.querySelector("a.restart-button").click()
     window.close()
   }
 
